@@ -1,5 +1,5 @@
 import json
-from lesson_2 import numpy_pandas as pd
+import pandas as pd
 
 with open('./agentSimulate_new.json', "r", encoding="gbk") as f:
     resident_list = json.load(f)
