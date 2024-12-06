@@ -25,6 +25,7 @@ for key,value in residentDict.items():
     print(f"{key} : {value}")
 # 定位出前100个居民
 # 创建一个字典，表示每一个"house_ue_id"对应了几个居民
+# Q1
 # 利用这个字典，找出住的人最多的"house_ue_id"，不需要体现是否并列第一
 houseUEIDDict = {}
 templeList = resident_list[:101]
@@ -45,6 +46,7 @@ for key, value in houseUEIDDict.items():
         keyOfFirst.append(key)
 print(f"{keyOfFirst} have the most resident ({largestValue})")
 
+# Q2
 # 展示出是否并列第一
 
 resident_df = pd.read_csv("./leeson_1/population.csv")

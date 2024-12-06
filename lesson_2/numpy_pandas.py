@@ -68,28 +68,50 @@ index
 """
 get column
 """
-random.seed(2)
-df_3 = pd.DataFrame({"A":[random.choice(range(100)) for i in range(10000)],
-                     "B":[random.choice(range(100)) for i in range(10000)],
-                     "C":[random.choice(range(100)) for i in range(10000)],
-                     "D":[random.choice(range(100)) for i in range(10000)],
-                     "E":[random.choice(range(100)) for i in range(10000)]}
-                    )
-print(df_3["A"])
+# random.seed(2)
+# df_3 = pd.DataFrame({"A":[random.choice(range(100)) for i in range(10000)],
+#                      "B":[random.choice(range(100)) for i in range(10000)],
+#                      "C":[random.choice(range(100)) for i in range(10000)],
+#                      "D":[random.choice(range(100)) for i in range(10000)],
+#                      "E":[random.choice(range(100)) for i in range(10000)]}
+#                     )
+# print(df_3.head()["A"])
 
 # tolist操作
 
 """
 get element of dataframe
 """
-print(type(df_3["A"].iloc[4]))
-print(df_3.iloc[4]["A"])
-print(df_3.loc[4,"A"])
-print(df_3.iloc[4,0])
-print(df_3["A"].iloc[4] + 6)
+# print(type(df_3["A"].iloc[4]))
+# print(df_3.iloc[4]["A"])
+# print(df_3.loc[4,"A"])
+# print(df_3.iloc[4,0])
+# print(df_3["A"].iloc[4] + 6)
 
 """
 find the student with the highest math grade
 """
 
+"""
+add new row
+"""
+# df_3 = df_3._append({"A":10, "B":20, "C":30, "D":40, "E":40},ignore_index=True)
+# #ignore_index = True 不可省略
+# print(df_3)
 
+"""
+add new column
+"""
+# length = len(df_3)
+# df_3["F"] = [random.choice(range(100)) for i in range(length)]
+# print(df_3.head())
+
+"""
+apply method
+"""
+# df_3["A"] = df_3["A"].apply(lambda x : x * 2)
+# print(df_3.head()["A"])
+
+"""
+添加一列表现 math grade 与平均分的差值
+"""
