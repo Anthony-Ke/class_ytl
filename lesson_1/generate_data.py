@@ -1,4 +1,4 @@
-from lesson_2 import numpy_pandas as pd
+import pandas as pd
 import random
 
 
@@ -23,6 +23,8 @@ genders_list = [random.choice(genders) for i in range(1500)]
 
 df = pd.DataFrame({"address": address_list, "age": ages_list, "gender": genders_list})
 df.to_csv("./population.csv", index=False)
+
+
 
 
 

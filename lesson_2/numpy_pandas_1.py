@@ -80,6 +80,11 @@ get column
 # tolist操作
 
 """
+找出不同age各有多少人 和 各个gender有多少人 
+"""
+df_population = pd.read_csv("./population.csv")
+
+"""
 get element of dataframe
 """
 # print(type(df_3["A"].iloc[4]))
@@ -100,6 +105,11 @@ add new row
 # print(df_3)
 
 """
+添加一行展示各个学科的平均分，identity, gender, class number全部写 "All"
+"""
+
+
+"""
 add new column
 """
 # length = len(df_3)
@@ -113,5 +123,9 @@ apply method
 # print(df_3.head()["A"])
 
 """
-添加一列表现 math grade 与平均分的差值
+添加一列表现学生的数学成绩和平均分的差值
+"""
+
+"""
+将最终的df写成csv的格式
 """
