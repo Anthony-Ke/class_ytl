@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 
-with open(file = "./lesson_1/agentSimulate_new.json",mode="r", encoding="gbk") as f:
+with open(file = "./agentSimulate_new.json",mode="r", encoding="gbk") as f:
     resident_list = json.load(f)
 
 print(resident_list[0].keys())
@@ -11,7 +11,7 @@ print(resident_list[0].keys())
 # 以居民的"id"为key，对应的value为一个字典。
 # 这个字典里面包含了姓名，性别，house_ue_id，职业这些信息
 residentDict = {}
-templeList = resident_list[:101]
+templeList = resident_list[:100]
 for resident in templeList:
     id = resident["id"]
     name = resident["姓名"]
@@ -28,7 +28,7 @@ for key,value in residentDict.items():
 # Q1
 # 利用这个字典，找出住的人最多的"house_ue_id"，不需要体现是否并列第一
 houseUEIDDict = {}
-templeList = resident_list[:101]
+templeList = resident_list[:100]
 for resident in templeList:
     houseUEID = houseUEID = resident["house_ue_id"]
     if houseUEID in houseUEIDDict.keys():
@@ -49,5 +49,5 @@ print(f"{keyOfFirst} have the most resident ({largestValue})")
 # Q2
 # 展示出是否并列第一
 
-resident_df = pd.read_csv("./leeson_1/population.csv")
+resident_df = pd.read_csv("./population.csv")
 #
