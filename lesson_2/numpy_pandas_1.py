@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 import random
+import math
+
+random.seed(0)
 
 """
 numpy 结构
@@ -27,7 +30,7 @@ convert numpy array to pandas dataframe
 """
 convert dict to pandas dataframe
 """
-# random.seed(0)
+
 # df_2 = pd.DataFrame({"A":[random.choice(range(100)) for i in range(35)],
 #                      "B":[random.choice(range(100)) for i in range(35)],
 #                      "C":[random.choice(range(100)) for i in range(35)],
@@ -39,14 +42,17 @@ convert dict to pandas dataframe
 practice: generate a df of 100 students with different identity id, gender, class number (1-4)
 random math grade, random english grade and random economics grade
 """
-df_student = pd.DataFrame({"ID":[str(loopnumber) for loopnumber in range(100)],
-                          "Gender":[random.choice(["Male","Femele"]) for _ in range(100)],
-                          "Class_Number":[f"Class_{random.choice(range(1,5))}" for _ in range(100)],
-                          "Math_Grade":[random.choice(range(101)) for _ in range(100)],
-                          "English_Grade":[random.choice(range(101)) for _ in range(100)],
-                          "Economy_Grade":[random.choice(range(101)) for _ in range(100)],
-                          })
-print(df_student.head())
+df_student = pd.DataFrame({
+    "ID":[str(10000+i) for i in range(100)],
+    "gender":[random.choice(["male", "female"]) for i in range(100)],
+    "class_number":[f"class_{random.choice(range(1,5))}" for i in range(100)],
+    "Math_Grade":[random.choice(range(101)) for i in range(100)],
+    "English":[random.choice(range(101)) for i in range(100)],
+    "Economics":[random.choice(range(101)) for i in range(100)],
+})
+# print(df_class.head())
+
+
 """
 iloc
 """
@@ -59,7 +65,7 @@ iloc
 index
 """
 #Index将会选择某一列作为index
-# random.seed(1)
+
 # df_3 = pd.DataFrame({"A":[random.choice(range(100)) for i in range(10000)],
 #                      "B":[random.choice(range(100)) for i in range(10000)],
 #                      "C":[random.choice(range(100)) for i in range(10000)],
@@ -69,6 +75,15 @@ index
 # print(df_3.head())
 #
 # df_3.index = df_3["A"]
+# # 这个操作不会消除掉对应的列
+# print(df_3.head())
+
+"""
+消除某一列
+"""
+# axis = 1 表示对列操作
+# axis = 0 表示对行操作
+# df_3 = df_3.drop(["A"],axis=1)
 # print(df_3.head())
 
 """
@@ -78,19 +93,29 @@ index
 # 得出的不一定是一行
 # 根据index内容查找
 # 返回值还是一个dataframe
+
+# print(df_3.loc[str(8)])
+# 得出的不一定是一行
+
+
 """
 get column
 """
-# random.seed(2)
-# df_3 = pd.DataFrame({"A":[random.choice(range(100)) for i in range(10000)],
-#                      "B":[random.choice(range(100)) for i in range(10000)],
-#                      "C":[random.choice(range(100)) for i in range(10000)],
-#                      "D":[random.choice(range(100)) for i in range(10000)],
-#                      "E":[random.choice(range(100)) for i in range(10000)]}
-#                     )
+random.seed(2)
+df_3 = pd.DataFrame({"A":[random.choice(range(100)) for i in range(10000)],
+                     "B":[random.choice(range(100)) for i in range(10000)],
+                     "C":[random.choice(range(100)) for i in range(10000)],
+                     "D":[random.choice(range(100)) for i in range(10000)],
+                     "E":[random.choice(range(100)) for i in range(10000)]}
+                    )
+# print(df_3.head())
 # print(df_3.head()["A"])
-#返回值为dataseries
+# 这也是一个pandas series
+
 # tolist操作
+# 非常非常常用的方法
+# list_A = df_3["A"].tolist()
+# print(list_A[:20])
 
 """
 找出不同age各有多少人 和 各个gender有多少人 
@@ -123,12 +148,23 @@ for personIndex in range(len(ageList)):
         genderResultDict[genderList[personIndex]] = 1
 # 存储为一个字典
 resultDict = {"age":ageResultDict,"gender":genderResultDict}
-print(resultDict)
+
+#print(resultDict)
+
 """
 get element of dataframe
 """
+# df.loc[row_indexer, "col"] = values
+# print(df_3["A"].iloc[4])
 # print(type(df_3["A"].iloc[4]))
+#
+# df_3.loc[4, "A"] = 88
+# print(df_3["A"].iloc[4])
+# print(type(df_3["A"].iloc[4]))
+#
+#
 # print(df_3.iloc[4]["A"])
+#
 # print(df_3.loc[4,"A"])
 # print(df_3.iloc[4,0])
 # print(df_3["A"].iloc[4] + 6)
@@ -158,7 +194,6 @@ for personIndex in range(len(IDList)):
 print(f"{studentHaveHigestGrade} have  the higest grabe on math ({higestGrade})")
 
 
-    
 
 
 """
@@ -169,12 +204,17 @@ add new row
 #还可以用list来进行一些额外操作
 #一般在遍历等里面常用
 # df_3 = df_3._append({"A":10, "B":20, "C":30, "D":40, "E":40},ignore_index=True)
+# 用这种方法添加一行
+dict_example = {"A":10, "B":20, "C":30, "D":40, "E":40}
+df_3 = df_3._append(dict_example,ignore_index=True)
 # #ignore_index = True 不可省略
 # print(df_3)
 
 """
 添加一行展示各个学科的平均分,identity, gender, class number全部写 "All"
 """
+student_column_names = df_student.columns
+#print(student_column_names)
 
 """
 add new column
@@ -182,7 +222,33 @@ add new column
 # 获取的是行数用len的话
 # length = len(df_3)
 # df_3["F"] = [random.choice(range(100)) for i in range(length)]
+math_list = df_student["Math_Grade"].tolist()
+english_list = df_student["English"].tolist()
+economics_list = df_student["Economics"].tolist()
+
+mean_math = sum(math_list)/len(math_list)
+mean_english = sum(english_list)/len(english_list)
+mean_economics = sum(economics_list)/len(economics_list)
+# dict_example = {"ID":"All",
+#                 "gender":"All",
+#                 "class_number":"All",
+#                 'Math_Grade':mean_math,
+#                 'English':mean_english,
+#                 'Economics':mean_economics}
+# df_student = df_student._append(dict_example,ignore_index=True)
+#print(df_student.tail())
+
+"""
+add new column
+"""
+# len()获得行数
+length = len(df_3)
+df_3["F"] = [random.choice(range(100)) for i in range(length)]
 # print(df_3.head())
+
+# 测试能否更改已有的column
+df_3["A"] = [random.choice(range(100)) for i in range(length)]
+print(df_3.head())
 
 """
 apply method
@@ -190,6 +256,21 @@ apply method
 # 对一个panda series进行同样操作
 # df_3["A"] = df_3["A"].apply(lambda x : x * 2)
 # print(df_3.head()["A"])
+# 对于一个panda series中的每一个元素进行同样的操作
+df_3["G"] = [random.choice(range(100))*0.2-10 for i in range(length)]
+df_3["A"] = df_3["A"].apply(lambda x : x * 2)
+print(df_3.head())
+
+def activation(x):
+    result = math.e**x
+    if result>100:
+        result=100
+    if result<0.1:
+        result = 0.1
+    return result
+
+df_3["G"] = df_3["G"].apply(activation)
+# print(df_3.head())
 
 """
 添加一列表现学生的数学成绩和平均分的差值
