@@ -90,12 +90,13 @@ home_work_12_7
 """
 pd concatenate
 """
-#
+#分为横竖，按行和按列，某人直接加到下方（axis = 0）
+#需要左右就可以axis = 1
 
 # # 生成一个新的df, 表头为"address" , "num_residents"
 # # address 仍然为 地址 num_residents 为这一户住了多少人
 # df_grouped_by_address = df.groupby("address")
-#
+#初始化了一个list
 # df_list = []
 # for name, group in df_grouped_by_address:
 #     df_temp = pd.DataFrame({
@@ -103,7 +104,8 @@ pd concatenate
 #         "num_residents": [len(group)]
 #     })
 #     df_list.append(df_temp)
-#
+# df_list没每个元素都是个df，每个df只有一行
+# 这个只会接受list
 # df_num_residents = pd.concat(df_list,axis=0)
 # print(df_num_residents)
 #
@@ -115,7 +117,7 @@ pd concatenate
 #     "income": income,
 #     "num_friends":num_friends
 # })
-#
+# 左右拼接
 # df = pd.concat([df,df_new],axis = 1)
 # print(df.head())
 #

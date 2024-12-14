@@ -1,7 +1,6 @@
 import random
 
 random.seed(1)
-
 print(random.choice(range(100)))
 print(random.choice(range(100)))
 print(random.choice(range(100)))
